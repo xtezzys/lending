@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Блеск — студия детейлинга автомобилей</title>
+<meta name="description" content="Студия детейлинга «Блеск»: полировка, керамика, химчистка, антигравийная плёнка, удаление вмятин без покраски.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#06070a; --graphite:#12151a; --raised:#1a1f26; --line:#2a313b;
+  --silver:#c8d0db; --blue:hsl(216, 97%, 88%); --blue-deep:#3b82f6; --text:#e8ecf2; --muted:#98a2b0;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--black);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+section,footer{scroll-margin-top:88px}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+.wrap{width:min(1120px,92%);margin-inline:auto}
+section{padding:96px 0}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:16px}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:48px;font-size:1.05rem}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* Блик на заголовках */
+.shine{background:linear-gradient(100deg,var(--text) 0%,var(--text) 40%,#fff 50%,var(--blue) 56%,var(--text) 66%,var(--text) 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;transition:background-position 1.2s ease}
+.shine.in,.shine:hover{background-position:0 0}
+
+/* Кнопки */
+.btn{display:inline-block;padding:15px 30px;border-radius:999px;font-weight:700;border:1px solid transparent;cursor:pointer;font:inherit;font-weight:700;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue-deep));color:#04101f}
+.btn-primary::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(59,130,246,.4)}
+.btn-primary:hover::after{left:130%}
+.btn-ghost{border-color:var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--silver);transform:translateY(-3px)}
+
+/* Шапка */
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(6,7,10,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:800;font-size:1.4rem;letter-spacing:-.02em}
+.logo span{color:var(--blue)}
+.menu{display:flex;gap:28px;list-style:none;align-items:center}
+.menu a{color:var(--muted);font-size:.95rem;font-weight:500;transition:color .2s}
+.menu a:hover{color:var(--text)}
+.burger{display:none;background:none;border:0;color:var(--text);width:44px;height:44px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:currentColor;margin:5px auto;transition:.3s}
+
+/* Главный экран */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 75% 30%,rgba(106,168,255,.16),transparent 70%),radial-gradient(ellipse 50% 40% at 10% 100%,rgba(200,208,219,.07),transparent 70%)}
+.hero::before{content:"";position:absolute;top:-20%;left:-40%;width:35%;height:140%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.07),transparent);transform:skewX(-20deg);animation:sweep 7s ease-in-out 1s infinite}
+@keyframes sweep{0%{left:-40%}60%,100%{left:120%}}
+.hero h1{font-size:clamp(2.8rem,8vw,6.2rem);font-weight:800;max-width:13ch;margin-bottom:24px}
+.hero p{font-size:1.2rem;color:var(--muted);max-width:50ch;margin-bottom:36px}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+
+/* О студии */
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:start}
+.about p{color:var(--muted);margin-bottom:16px}
+.materials{background:var(--graphite);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.materials h3{font-size:1.2rem;margin-bottom:16px}
+.materials li{list-style:none;padding:12px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+.materials li:first-of-type{border-top:0}
+.materials b{color:var(--text);display:block}
+
+/* Карточки */
+.grid{display:grid;gap:20px}
+.services{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--graphite);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(106,168,255,.12),transparent 50%);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.card:hover::before{opacity:1}
+.card>*{position:relative}
+.icon{width:46px;height:46px;border-radius:12px;background:var(--raised);display:grid;place-items:center;margin-bottom:18px;color:var(--blue)}
+.icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:1.2rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.95rem}
+
+/* Пакеты */
+.packages{grid-template-columns:repeat(3,1fr);align-items:stretch}
+.pack{display:flex;flex-direction:column}
+.pack .price{font-size:2.4rem;font-weight:800;margin:10px 0 20px;letter-spacing:-.03em}
+.pack .price small{font-size:.9rem;color:var(--muted);font-weight:500}
+.pack ul{list-style:none;margin-bottom:28px;flex:1}
+.pack li{padding:9px 0 9px 28px;position:relative;color:var(--muted);font-size:.95rem;border-top:1px solid var(--line)}
+.pack li::before{content:"";position:absolute;left:2px;top:15px;width:12px;height:7px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.pack.featured{background:linear-gradient(180deg,#1b2430,var(--graphite));border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 20px 50px rgba(59,130,246,.18)}
+.badge{position:absolute;top:18px;right:18px;background:var(--blue);color:#04101f;font-size:.78rem;font-weight:800;padding:5px 12px;border-radius:999px}
+
+/* Шаги */
+.steps{grid-template-columns:repeat(4,1fr);counter-reset:s}
+.step{counter-increment:s}
+.step::after{content:counter(s);position:absolute;right:20px;top:6px;font-size:5rem;font-weight:800;color:var(--raised);line-height:1;z-index:0}
+.step>*{z-index:1}
+
+/* Отзывы */
+.slider{overflow:hidden;border-radius:var(--radius)}
+.track{display:flex;transition:transform .6s cubic-bezier(.7,0,.2,1)}
+.slide{min-width:100%;padding:40px;background:var(--graphite);border:1px solid var(--line);border-radius:var(--radius)}
+.slide blockquote{font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:500;line-height:1.5;margin-bottom:24px;max-width:48ch}
+.slide cite{font-style:normal;color:var(--muted);font-size:.95rem}
+.slide cite b{color:var(--text)}
+.stars{color:var(--blue);letter-spacing:3px;margin-bottom:16px}
+.slider-ctrl{display:flex;align-items:center;gap:12px;margin-top:20px}
+.arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--text);font-size:1.2rem;cursor:pointer;transition:.25s}
+.arrow:hover{border-color:var(--blue);color:var(--blue);transform:scale(1.08)}
+.dots{display:flex;gap:8px;margin-left:8px}
+.dot{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:.3s}
+.dot.active{background:var(--blue);width:28px;border-radius:5px}
+
+/* FAQ */
+.faq{max-width:780px}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-weight:700;font-size:1.1rem;position:relative;transition:color .2s}
+summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--blue)}
+summary::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:1.6rem;color:var(--blue);transition:transform .3s}
+details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details p{color:var(--muted);padding:0 0 22px;max-width:62ch;animation:open .35s ease}
+@keyframes open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* Контакты */
+.contacts{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.info p{color:var(--muted);margin-bottom:22px}
+.info b{display:block;color:var(--text);margin-bottom:2px}
+.socials{display:flex;gap:12px;flex-wrap:wrap}
+.socials a{padding:10px 18px;border:1px solid var(--line);border-radius:999px;font-size:.92rem;transition:.25s}
+.socials a:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-3px)}
+form{background:var(--graphite);border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:grid;gap:16px}
+label{font-size:.9rem;color:var(--muted);display:grid;gap:6px}
+input,select{width:100%;padding:14px 16px;background:var(--black);border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(106,168,255,.2)}
+/* Согласие на обработку данных */
+.consent{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:.85rem;line-height:1.45;cursor:pointer}
+.consent input[type="checkbox"]{width:18px;height:18px;flex:0 0 18px;margin:2px 0 0;padding:0;appearance:none;-webkit-appearance:none;background:var(--black);border:1px solid var(--line);border-radius:5px;display:grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s}
+.consent input[type="checkbox"]:hover{border-color:var(--silver)}
+.consent input[type="checkbox"]:checked{background:var(--blue);border-color:var(--blue)}
+.consent input[type="checkbox"]:checked::after{content:"✓";color:#04101f;font-weight:800;font-size:.8rem;line-height:1}
+.consent:hover{color:var(--text)}
+.ok{display:none;color:var(--blue);font-weight:700}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem;text-align:center}
+
+/* Появление при прокрутке */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  section{padding:72px 0}
+  .services,.packages,.steps{grid-template-columns:1fr 1fr}
+  .about,.contacts{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .burger{display:block}
+  .menu{position:absolute;top:68px;left:0;right:0;background:var(--graphite);flex-direction:column;padding:12px 0;gap:0;border-bottom:1px solid var(--line);max-height:0;overflow:hidden;padding:0;transition:max-height .35s}
+  .menu.open{max-height:420px}
+  .menu li{width:100%}
+  .menu a{display:block;padding:16px 4%}
+  .services,.packages,.steps{grid-template-columns:1fr}
+  .slide{padding:26px}
+  .hero .actions .btn{width:100%;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo">Блеск<span>.</span></a>
+    <button class="burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="menu">
+      <li><a href="#about">О студии</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#packages">Пакеты</a></li>
+      <li><a href="#process">Как работаем</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#faq">Вопросы</a></li>
+      <li><a href="#contacts" class="btn btn-primary" style="padding:10px 22px;color:#04101f">Рассчитать</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <h1 class="shine">Кузов, который отражает небо</h1>
+    <p>Полировка, керамика и защита кузова от мастеров с опытом более 9 лет. Вернём автомобилю глубину цвета и защитим её на годы.</p>
+    <div class="actions">
+      <a href="#contacts" class="btn btn-primary">Рассчитать стоимость</a>
+      <a href="#packages" class="btn btn-ghost">Смотреть пакеты</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="reveal">
+      <h2 class="shine">О студии</h2>
+      <p>«Блеск» начался в 2016 году с одного бокса и одной полировальной машинки. Основатель Артём семь лет работал в автосалоне и каждый раз видел, как новые машины теряют вид уже после первой зимы. Он решил делать иначе: не «навести красоту» на день, а защитить кузов надолго.</p>
+      <p>Сегодня у нас три бокса и команда из восьми мастеров. Каждый прошёл обучение у производителей материалов и ежегодно подтверждает навыки. Перед работой мы измеряем толщину лакокрасочного слоя и честно говорим, что можно сделать, а что не стоит.</p>
+      <p>На каждую работу даём письменную гарантию и фотоотчёт по этапам.</p>
+    </div>
+    <div class="materials reveal">
+      <h3>С чем мы работаем</h3>
+      <ul>
+        <li><b>Керамические покрытия 9H</b>Профессиональные составы с гидрофобным эффектом</li>
+        <li><b>Полировальные пасты</b>Мелкозернистые, подбираем под твёрдость лака</li>
+        <li><b>Полиуретановая плёнка</b>Самовосстанавливается от мелких царапин</li>
+        <li><b>Безопасная химия</b>pH-нейтральные средства для салона и кузова</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2 class="shine reveal">Услуги</h2>
+    <p class="lead reveal">Шесть направлений, которые закрывают всё: от обычной мойки до защиты кузова на годы.</p>
+    <div class="grid services">
+      <article class="card reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div><h3>Комплексная мойка</h3><p>Бесконтактная мойка, очистка колёсных арок, порогов и дисков, сушка и обработка пластика.</p></article>
+      <article class="card reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></div><h3>Полировка кузова</h3><p>Убираем паутинку, мелкие царапины и потускнение. Возвращаем глубину и зеркальность цвета.</p></article>
+      <article class="card reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Керамическое покрытие</h3><p>Твёрдая прозрачная защита от реагентов, грязи и УФ. Вода и грязь скатываются с поверхности.</p></article>
+      <article class="card reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 18v-6a3 3 0 0 1 3-3h4l2-4h3l1 4h1a2 2 0 0 1 2 2v7"/><path d="M4 18h16M7 21v-3M17 21v-3"/></svg></div><h3>Химчистка салона</h3><p>Глубокая чистка тканей, кожи и потолка, удаление запахов и пятен, озонирование по желанию.</p></article>
+      <article class="card reveal"><div class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg></div><h3>Антигравийная плёнка</h3><p>Прозрачная плёнка на капот, бампер, крылья и пороги защищает от сколов и песка на трассе.</p></article>
+      <article class="card reveal"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg></div><h3>Удаление вмятин без покраски</h3><p>Выправляем вмятины от града и парковок специальными крючками. Заводская краска остаётся родной.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="wrap">
+    <h2 class="shine reveal">Пакеты услуг</h2>
+    <p class="lead reveal">Цены для легкового автомобиля. Для кроссоверов и внедорожников рассчитываем отдельно.</p>
+    <div class="grid packages">
+      <article class="card pack reveal">
+        <h3>Базовый</h3><p>Чтобы машина снова выглядела чистой</p>
+        <div class="price">6 900 ₽</div>
+        <ul><li>Бесконтактная мойка кузова</li><li>Мойка дисков и арок</li><li>Пылесос и влажная уборка салона</li><li>Обработка пластика и стёкол</li></ul>
+        <a href="#contacts" class="btn btn-ghost">Выбрать</a>
+      </article>
+      <article class="card pack featured reveal">
+        <span class="badge">Выбор клиентов</span>
+        <h3>Стандарт</h3><p>Восстановление цвета и защита</p>
+        <div class="price">18 500 ₽</div>
+        <ul><li>Всё из пакета «Базовый»</li><li>Одношаговая полировка кузова</li><li>Нанесение воска-герметика</li><li>Чернение резины и обработка уплотнителей</li><li>Фотоотчёт по этапам</li></ul>
+        <a href="#contacts" class="btn btn-primary">Выбрать</a>
+      </article>
+      <article class="card pack reveal">
+        <h3>Премиум</h3><p>Максимальная защита на годы</p>
+        <div class="price">49 000 ₽</div>
+        <ul><li>Всё из пакета «Стандарт»</li><li>Многоэтапная полировка</li><li>Керамика 9H, гарантия 3 года</li><li>Химчистка салона</li><li>Плёнка на зону риска капота</li></ul>
+        <a href="#contacts" class="btn btn-ghost">Выбрать</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <h2 class="shine reveal">Как мы работаем</h2>
+    <p class="lead reveal">Четыре шага, на каждом вы знаете, что происходит с машиной.</p>
+    <div class="grid steps">
+      <article class="card step reveal"><h3>Заявка</h3><p>Оставляете заявку на сайте или звоните. Мы уточняем задачу и называем ориентировочную цену.</p></article>
+      <article class="card step reveal"><h3>Осмотр авто</h3><p>Мастер осматривает кузов при свете, замеряет лак и фиксирует итоговый список работ и стоимость.</p></article>
+      <article class="card step reveal"><h3>Работа</h3><p>Выполняем работы в тёплом боксе и присылаем фотографии после каждого этапа.</p></article>
+      <article class="card step reveal"><h3>Выдача автомобиля</h3><p>Вместе осматриваем результат, вручаем гарантию и рекомендации по уходу.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <h2 class="shine reveal">Отзывы</h2>
+    <div class="reveal">
+      <div class="slider"><div class="track">
+        <div class="slide"><div class="stars">★★★★★</div><blockquote>«Взял машину после трёх зим без мойки в гараже. Ребята сделали полировку и керамику, на солнце цвет заиграл так, как будто только из салона. Через полгода вода всё так же скатывается».</blockquote><b>Дмитрий К.</b>, Skoda Octavia</div>
+        <div class="slide"><div class="stars">★★★★★</div><blockquote>«Убрали вмятину от града на капоте без покраски. В другом месте обещали перекрас за 40 тысяч. Здесь сделали за день и в разы дешевле, места правки не найти».</blockquote><b>Анна М.</b>, Kia Sportage</div>
+        <div class="slide"><div class="stars">★★★★★</div><blockquote>«Химчистка салона после поездки с ребёнком и собакой. Думал, что пятна не отойдут. Отошли все, запах пропал, сиденья как новые. Фотоотчёт приятный бонус».</blockquote><b>Игорь П.</b>, Toyota Camry</div>
+      </div></div>
+      <div class="slider-ctrl">
+        <button class="arrow" id="prev" aria-label="Предыдущий отзыв">←</button>
+        <button class="arrow" id="next" aria-label="Следующий отзыв">→</button>
+        <div class="dots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="shine reveal">Частые вопросы</h2>
+    <div class="faq reveal">
+      <details><summary>Сколько времени занимает работа?</summary><p>Мойка занимает 2–3 часа, полировка один-два дня, керамика с подготовкой два-три дня. Точный срок называем после осмотра.</p></details>
+      <details><summary>Как долго держится керамическое покрытие?</summary><p>В среднем от 2 до 5 лет, в зависимости от состава и ухода. На премиум-пакет даём письменную гарантию на 3 года.</p></details>
+      <details><summary>Можно ли полировать машину много раз?</summary><p>Каждая полировка снимает микрослой лака, поэтому мы всегда замеряем толщину. Если запас небольшой, выбираем более мягкие методы или защитную плёнку.</p></details>
+      <details><summary>Нужно ли записываться заранее?</summary><p>Да, запись нужна, чтобы выделить бокс и мастера. Обычно ближайшее окно бывает через 2–4 дня, на сезон шин и весной очередь больше.</p></details>
+      <details><summary>Что если результат мне не понравится?</summary><p>Расскажите об этом при выдаче или в течение 14 дней. Мы исправим недочёты бесплатно, если они связаны с нашей работой.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap contacts">
+    <div class="info reveal">
+      <h2 class="shine">Рассчитать стоимость</h2>
+      <p>Оставьте заявку, и мы перезвоним в течение 15 минут в рабочее время.</p>
+      <p><b>Адрес</b>Санкт-Петербург, ул. Примерная, 12, бокс 3</p>
+      <p><b>Часы работы</b>Пн–Сб: 09:00–20:00, Вс: 10:00–18:00</p>
+      <p><b>Телефон</b><a href="tel:+78120000000">+7 (812) 000-00-00</a></p>
+      <div class="socials"><a href="#">Telegram</a><a href="#">VK</a><a href="#">WhatsApp</a></div>
+    </div>
+    <form id="lead" class="reveal">
+      <label>Имя<input type="text" name="name" required autocomplete="name" placeholder="Как к вам обращаться"></label>
+      <label>Телефон<input type="tel" name="phone" required autocomplete="tel" placeholder="+7 (___) ___-__-__"></label>
+      <label>Марка автомобиля<input type="text" name="car" required placeholder="Например, Toyota Camry"></label>
+      <label>Услуга
+        <select name="service" id="service" required>
+          <option value="">Выберите услугу</option>
+          <option>Комплексная мойка</option><option>Полировка кузова</option><option>Керамическое покрытие</option>
+          <option>Химчистка салона</option><option>Антигравийная плёнка</option><option>Удаление вмятин без покраски</option>
+          <option>Пакет «Базовый»</option><option>Пакет «Стандарт»</option><option>Пакет «Премиум»</option>
+        </select>
+      </label>
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span>Согласен на обработку персональных данных</span>
+      </label>
+      <button class="btn btn-primary" type="submit">Отправить заявку</button>
+      <p class="ok" role="status">Заявка отправлена. Мы перезвоним в течение 15 минут.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 Блеск. Студия детейлинга автомобилей.</div></footer>
+
+<script>
+// Меню и тень шапки
+const header=document.querySelector('header'),burger=document.querySelector('.burger'),menu=document.querySelector('.menu');
+burger.addEventListener('click',()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+menu.addEventListener('click',e=>{if(e.target.closest('a')){menu.classList.remove('open');burger.setAttribute('aria-expanded',false)}});
+addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+// Плавная прокрутка к разделам с учётом фиксированной шапки:
+// раздел встаёт сразу под шапку — заголовок сверху, весь контент виден ниже
+const reducedMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id.length<2)return; // пропускаем href="#" (соцсети и т.п.)
+    const target=document.getElementById(id.slice(1));
+    if(!target)return;
+    e.preventDefault();
+    menu.classList.remove('open');burger.setAttribute('aria-expanded',false);
+    // для фиксированных элементов (шапка/#top) rect.top уже привязан к вьюпорту
+    const docTop=getComputedStyle(target).position==='fixed'?target.getBoundingClientRect().top:target.getBoundingClientRect().top+scrollY;
+    const top=Math.max(docTop-header.offsetHeight-20,0);
+    window.scrollTo({top,behavior:reducedMotion?'auto':'smooth'});
+    history.replaceState(null,'',id);
+  });
+});
+
+// Появление блоков
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal,.shine').forEach(el=>io.observe(el));
+
+// Слайдер отзывов
+const track=document.querySelector('.track'),slides=track.children,dots=document.querySelector('.dots');
+let i=0,timer;
+for(let k=0;k<slides.length;k++){const d=document.createElement('button');d.className='dot';d.setAttribute('aria-label','Отзыв '+(k+1));d.onclick=()=>go(k,true);dots.appendChild(d)}
+function go(n,user){i=(n+slides.length)%slides.length;track.style.transform='translateX(-'+i*100+'%)';[...dots.children].forEach((d,k)=>d.classList.toggle('active',k===i));if(user)restart()}
+function restart(){clearInterval(timer);if(!matchMedia('(prefers-reduced-motion:reduce)').matches)timer=setInterval(()=>go(i+1),7000)}
+document.getElementById('prev').onclick=()=>go(i-1,true);
+document.getElementById('next').onclick=()=>go(i+1,true);
+go(0);restart();
+
+// Форма
+document.getElementById('lead').addEventListener('submit',e=>{e.preventDefault();e.target.querySelector('.ok').style.display='block';e.target.reset()});
+
+// Выбор пакета из карточки — авто-подстановка в форме
+document.querySelectorAll('.pack .btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const card=btn.closest('.pack');
+    const name=card.querySelector('h3').textContent.trim();
+    const service=document.getElementById('service');
+    if(service)service.value='Пакет «'+name+'»';
+  });
+});
+</script>
+</body>
+</html>
